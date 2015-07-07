@@ -20,10 +20,10 @@ class Form extends Generator implements GeneratorInterface
         foreach ($fieldData as $property => $meta) {
 
             $display           = Str::title(str_replace('_', ' ', $property));
-            $result['label']   = "{{ Form::label('{$property}', '{$display}:') }}";
+            $result['label']   = "{!! Form::label('{$property}', '{$display}:') !!}";
             
             $elementType       = $this->getElementType($meta['type']);
-            $result['element'] = "{{ Form::{$elementType}('{$property}') }}";
+            $result['element'] = "{!! Form::{$elementType}('{$property}') !!}";
             
             $form_rows[]       = $result;
         }
