@@ -1,4 +1,4 @@
-<?php
+<?php namespace App\Http\Controllers;
 
 use App\Services\{{Entity}}Creator;
 use App\Contracts\Repositories\{{Entity}}RepositoryInterface;
@@ -8,7 +8,7 @@ use App\Contracts\Notification\UpdaterInterface;
 use App\Contracts\Notification\DestroyerInterface;
 use App\Validators\Validator as Validator;
 
-class {{Entities}}Controller extends BaseController implements CreatorInterface, UpdaterInterface, DestroyerInterface
+class {{Entities}}Controller extends Controller implements CreatorInterface, UpdaterInterface, DestroyerInterface
 {
 
     /**

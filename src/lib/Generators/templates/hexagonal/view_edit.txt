@@ -7,21 +7,21 @@
 
 @if ($errors->any())
     <ul>
-        {{ implode('', $errors->all('<li class="error">:message</li>')) }}
+        {!! implode('', $errors->all('<li class="error">:message</li>')) !!}
     </ul>
 @endif
 
-{{ Form::model($<%instance%>, array('method' => 'PATCH', 'route' => array('<% collection %>.update', $<% instance %>->id))) }}
+{!! Form::model($<%instance%>, array('method' => 'PATCH', 'route' => array('<% collection %>.update', $<% instance %>->id))) !!}
     <ul>
         
         @include('<% collection %>._form')
 
         <li>
-            {{ Form::submit('Update', array('class' => 'btn btn-info')) }}
-            {{ link_to_route('<% collection %>.show', 'Cancel', $<% instance %>->id, array('class' => 'btn')) }}
+            {!! Form::submit('Update', array('class' => 'btn btn-info')) !!}
+            {!! link_to_route('<% collection %>.show', 'Cancel', $<% instance %>->id, array('class' => 'btn')) !!}
         </li>
 
     </ul>
-{{ Form::close() }}
+{!! Form::close() !!}
 
 @stop
