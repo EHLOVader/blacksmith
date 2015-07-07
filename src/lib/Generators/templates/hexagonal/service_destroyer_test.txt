@@ -6,7 +6,7 @@
  */
 
 use Mockery as m;
-use Services\{{Entities}}\{{Entity}}Creator;
+use App\Services\{{Entities}}\{{Entity}}Creator;
 
 class {{Entity}}CreatorTest extends \TestCase
 {

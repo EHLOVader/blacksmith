@@ -1,12 +1,12 @@
 <?php
 
-use Services\{{Entity}}Creator;
-use Contracts\Repositories\{{Entity}}RepositoryInterface;
-use Contracts\Instances\InstanceInterface;
-use Contracts\Notification\CreatorInterface;
-use Contracts\Notification\UpdaterInterface;
-use Contracts\Notification\DestroyerInterface;
-use Validators\Validator as Validator;
+use App\Services\{{Entity}}Creator;
+use App\Contracts\Repositories\{{Entity}}RepositoryInterface;
+use App\Contracts\Instances\InstanceInterface;
+use App\Contracts\Notification\CreatorInterface;
+use App\Contracts\Notification\UpdaterInterface;
+use App\Contracts\Notification\DestroyerInterface;
+use App\Validators\Validator as Validator;
 
 class {{Entities}}Controller extends BaseController implements CreatorInterface, UpdaterInterface, DestroyerInterface
 {

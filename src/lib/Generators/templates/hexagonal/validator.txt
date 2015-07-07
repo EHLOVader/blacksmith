@@ -1,4 +1,4 @@
-<?php namespace Validators;
+<?php namespace App\Validators;
 
 class {{Entity}}Validator extends Validator
 {

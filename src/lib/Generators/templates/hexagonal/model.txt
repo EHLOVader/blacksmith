@@ -1,6 +1,6 @@
 <?php
 
-use Contracts\Instances\InstanceInterface;
+use App\Contracts\Instances\InstanceInterface;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class {{Entity}} extends Eloquent implements InstanceInterface

@@ -1,6 +1,6 @@
 <?php namespace Contracts\Repositories;
 
-use Contracts\Instances\InstanceInterface;
+use App\Contracts\Instances\InstanceInterface;
 
 
 /**

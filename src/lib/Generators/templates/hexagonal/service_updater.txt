@@ -1,8 +1,8 @@
-<?php namespace Services\{{Entities}};
+<?php namespace App\Services\{{Entities}};
 
-use Contracts\Repositories\{{Entity}}RepositoryInterface;
-use Contracts\Notification\UpdaterInterface;
-use Validators\{{Entity}}Validator;
+use App\Contracts\Repositories\{{Entity}}RepositoryInterface;
+use App\Contracts\Notification\UpdaterInterface;
+use App\Validators\{{Entity}}Validator;
 
 class {{Entity}}Updater
 {

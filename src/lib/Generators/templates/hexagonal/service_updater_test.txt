@@ -6,7 +6,7 @@
  */
 
 use Mockery as m;
-use Services\{{Entities}}\{{Entity}}Updater;
+use App\Services\{{Entities}}\{{Entity}}Updater;
 
 class {{Entity}}UpdaterTest extends \TestCase
 {

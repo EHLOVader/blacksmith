@@ -4,7 +4,7 @@
  * Handles creator events
  */
 
-use Contracts\Instances\InstanceInterface;
+use App\Contracts\Instances\InstanceInterface;
 
 interface DestroyerInterface
 {

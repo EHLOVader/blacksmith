@@ -1,11 +1,11 @@
-<?php namespace Repositories;
+<?php namespace App\Repositories;
 
-use Contracts\Repositories\{{Entity}}RepositoryInterface;
-use {{Entity}};
+use App\Contracts\Repositories\{{Entity}}RepositoryInterface;
+use App\Models\{{entity}};
 
 class Db{{Entity}}Repository extends DbRepository implements {{Entity}}RepositoryInterface
 {
-    /** @var {{Entity}} */
+    /** @var App\Models\{{entity}} */
     protected $model;
 
     public function __construct({{Entity}} $model)

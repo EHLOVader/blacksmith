@@ -1,8 +1,8 @@
-<?php namespace Services\{{Entities}};
+<?php namespace App\Services\{{Entities}};
 
-use Contracts\Repositories\{{Entity}}RepositoryInterface;
-use Contracts\Notification\CreatorInterface;
-use Validators\{{Entity}}Validator;
+use App\Contracts\Repositories\{{Entity}}RepositoryInterface;
+use App\Contracts\Notification\CreatorInterface;
+use App\Validators\{{Entity}}Validator;
 
 class {{Entity}}Creator
 {

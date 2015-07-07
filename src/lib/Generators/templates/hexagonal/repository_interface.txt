@@ -1,4 +1,4 @@
-<?php namespace Contracts\Repositories;
+<?php namespace App\Contracts\Repositories;
 
 interface {{Entity}}RepositoryInterface extends RepositoryInterface
 {

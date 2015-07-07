@@ -1,11 +1,11 @@
-<?php namespace Tests\Services\{{Entities}};
+<?php namespace App\Tests\Services\{{Entities}};
 
 /**
  * This class contains unit tests for the {{Entity}} creator.
  */
 
 use Mockery as m;
-use Services\{{Entities}}\{{Entity}}Creator;
+use App\Services\{{Entities}}\{{Entity}}Creator;
 use TestCase;
 
 class {{Entity}}CreatorTest extends TestCase
