@@ -1,11 +1,11 @@
 {{=<% %>=}}
-@extends('layouts.master')
+@extends('app')
 
 @section('content')
 
 <h1>Show <% Entity %></h1>
 
-<p>{{ link_to_route('<% collection %>.index', 'Return to all <% collection %>') }}</p>
+<p>{!! link_to_route('<% collection %>.index', 'Return to all <% collection %>') !!}</p>
 
 <table>
     <thead>
@@ -22,11 +22,11 @@
             <td>{{ <%& . %> }}</td>
             <%/ cells %>
 
-            <td>{{ link_to_route('<% collection %>.edit', 'Edit', array($<% instance %>->id), array('class' => 'btn btn-info')) }}</td>
+            <td>{!! link_to_route('<% collection %>.edit', 'Edit', array($<% instance %>->id), array('class' => 'btn btn-info')) !!}</td>
             <td>
-                {{ Form::open(array('method' => 'DELETE', 'route' => array('<% collection %>.destroy', $<% instance %>->id))) }}
-                    {{ Form::submit('Delete', array('class' => 'btn btn-danger')) }}
-                {{ Form::close() }}
+                {!! Form::open(array('method' => 'DELETE', 'route' => array('<% collection %>.destroy', $<% instance %>->id))) !!}
+                    {!! Form::submit('Delete', array('class' => 'btn btn-danger')) !!}
+                {!! Form::close() !!}
             </td>
         </tr>
     </tbody>

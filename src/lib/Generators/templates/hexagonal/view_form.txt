@@ -1,7 +1,7 @@
 {{=<% %>=}}
 <%# form_rows %>
-<li>
+<div class="form-group">
     <% label %>
     <% element %>
-</li>
+</div>
 <%/ form_rows %>
