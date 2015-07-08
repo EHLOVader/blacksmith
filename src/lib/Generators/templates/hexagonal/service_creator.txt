@@ -40,11 +40,11 @@ class {{Entity}}Creator
             if ($instance = $repository->create($attributes)) {
                 return $listener->creationSucceeded($instance);
             } else {
-                return $listener->creationFailed();
+                return $listener->creationFailed($this->validator->withError('{{instance}} could not be created.');
             }
 
         } else {
-            return $listener->creationFailedValidation($this->validator);
+            return $listener->creationFailed($this->validator);
         }
     }
 }
