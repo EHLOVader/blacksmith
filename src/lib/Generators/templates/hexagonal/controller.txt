@@ -1,5 +1,9 @@
 <?php namespace App\Http\Controllers;
 
+use App;
+use View;
+use Input;
+use Redirect;
 use App\Services\{{Entity}}Creator;
 use App\Contracts\Repositories\{{Entity}}RepositoryInterface;
 use App\Contracts\Instances\InstanceInterface;
@@ -52,7 +56,7 @@ class {{Entities}}Controller extends Controller implements CreatorInterface, Upd
      */
     public function store()
     {
-        ${{instance}}_creator = App::make('Services\{{Entities}}\{{Entity}}Creator');
+        ${{instance}}_creator = App::make('App\Services\{{Entities}}\{{Entity}}Creator');
 
         return ${{instance}}_creator->create($this->{{instance}}, $this, Input::except('_token'));
     }
@@ -116,7 +120,7 @@ class {{Entities}}Controller extends Controller implements CreatorInterface, Upd
      */
     public function update($id)
     {
-        ${{instance}}_updater = App::make('Services\{{Entities}}\{{Entity}}Updater');
+        ${{instance}}_updater = App::make('App\Services\{{Entities}}\{{Entity}}Updater');
 
         return ${{instance}}_updater->update($this->{{instance}}, $this, $id, Input::except('_method'));
     }
@@ -155,7 +159,7 @@ class {{Entities}}Controller extends Controller implements CreatorInterface, Upd
      */
     public function destroy($id)
     {
-        ${{instance}}_destroyer = App::make('Services\{{Entities}}\{{Entity}}Destroyer');
+        ${{instance}}_destroyer = App::make('App\Services\{{Entities}}\{{Entity}}Destroyer');
 
         return ${{instance}}_destroyer->destroy($this->{{instance}}, $this, $id, Input::except('_method'));
     }
