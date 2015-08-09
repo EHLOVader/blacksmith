@@ -54,8 +54,8 @@ class FormTest extends \BlacksmithTest
 
         $form_rows = [
             [
-                'label' => "{{ Form::label('name', 'Name:') }}",
-                'element' => "{{ Form::text('name') }}"
+                'label' => "{!! Form::label('name', 'Name:') !!}",
+                'element' => "{!! Form::text('name') !!}"
             ]
         ];
 
