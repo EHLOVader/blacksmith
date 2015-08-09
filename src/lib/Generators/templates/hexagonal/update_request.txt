@@ -1,0 +1,12 @@
+<?php namespace App\Requests\{{Entities}};
+
+class Update{{Entity}}Request extends {{Entity}}Request
+{
+	public function rules()
+	{
+	    // Add modifications to validation rules for update actions
+	    // Common one would be
+		//$this->rules['unique_column'] .= ',' . $this->route('{{instance}}')->id;
+		return $this->rules;
+	}
+}

@@ -1,0 +1,10 @@
+<?php namespace App\Requests\{{Entities}};
+
+class Store{{Entity}}Request extends {{Entity}}Request
+{
+	public function rules()
+	{
+	    // Add modifications to validation rules for store actions
+	    return $this->rules;
+	}
+}
