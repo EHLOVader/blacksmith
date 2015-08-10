@@ -1,4 +1,4 @@
-<?php namespace App\Html\Requests\{{Entities}};
+<?php namespace App\Http\Requests\{{Entities}};
 
 class {{Entity}}Request extends Request
 {
