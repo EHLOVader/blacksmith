@@ -45,7 +45,7 @@ class FieldParser
             // name:string(10)
             if (preg_match('/(.+?)\(([^)]+)\)/', $type, $matches)) {
                 $type = $matches[1];
-                $args = $matches[2];
+                $args = explode(',', $matches[2]);
             }
 
             // Finally, anything that remains will
