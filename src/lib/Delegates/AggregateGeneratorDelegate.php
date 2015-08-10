@@ -205,13 +205,13 @@ class AggregateGeneratorDelegate implements GeneratorDelegateInterface
          $name = strtolower(Pluralizer::plural($name));
 
 
-        $routes = implode(DIRECTORY_SEPARATOR, [$dir, 'app', 'routes.php']);
+        $routes = implode(DIRECTORY_SEPARATOR, [$dir, 'app','HTTP', 'routes.php']);
 
         if ($this->filesystem->exists($routes)) {
             $route = '/**** Route and IOC Binding for '.ucwords($entity)." ****/"."\n";
             $route .= "Route::resource('" . $name . "', '" . ucwords($name) . "Controller');"."\n";
             // App binding if not setup properly
-            $route .= "App::bind('Contracts\Repositories\\" . ucwords($entity) . "RepositoryInterface', 'Repositories\Db" . ucwords($entity) . "Repository');";
+            $route .= "App::bind('App\\Contracts\\Repositories\\" . ucwords($entity) . "RepositoryInterface', 'App\\Repositories\\Db" . ucwords($entity) . "Repository');";
            
             $contents = $this->filesystem->get($routes);
             if (str_contains($contents, $route)) {
