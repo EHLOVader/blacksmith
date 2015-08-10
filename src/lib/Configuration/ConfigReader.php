@@ -99,7 +99,10 @@ class ConfigReader implements ConfigReaderInterface
         "service_destroyer_test",
         "validator",
         "repository_interface",
-        "db_repository"
+        "db_repository",
+        "request",
+        "store_request",
+        "update_request"
     ];
 
     /**
@@ -129,7 +132,10 @@ class ConfigReader implements ConfigReaderInterface
             "service_destroyer_test",
             "validator",
             "repository_interface",
-            "db_repository"
+            "db_repository",
+            "request",
+            "store_request",
+            "update_request"
         ]
     ];
 

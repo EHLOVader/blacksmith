@@ -100,5 +100,20 @@
         "template": "db_repository.txt",
         "directory": "app/Repositories",
         "filename": "Db{{Entity}}Repository.php"
+    },
+    "store_request": {
+        "template": "store_request.txt",
+        "directory": "app/Requests/{{Entities}}",
+        "filename": "Store{{Entity}}Request.php"
+    },
+    "request": {
+        "template": "request.txt",
+        "directory": "app/Requests/{{Entities}}",
+        "filename": "{{Entity}}Request.php"
+    },
+    "update_request": {
+        "template": "update_request.txt",
+        "directory": "app/Requests/{{Entities}}",
+        "filename": "Update{{Entity}}Request.php"
     }
 }

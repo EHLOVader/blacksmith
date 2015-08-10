@@ -4,7 +4,10 @@ use App;
 use View;
 use Input;
 use Redirect;
-use App\Services\{{Entity}}Creator;
+use App\Services\{{Entities}}\{{Entity}}Creator;
+use App\Services\{{Entities}}\{{Entity}}Updater;
+use App\Requests\{{Entities}}\Store{{Entity}}Request;
+use App\Requests\{{Entities}}\Update{{Entity}}Request;
 use App\Contracts\Repositories\{{Entity}}RepositoryInterface;
 use App\Contracts\Instances\InstanceInterface;
 use App\Contracts\Notification\CreatorInterface;
@@ -54,11 +57,9 @@ class {{Entities}}Controller extends Controller implements CreatorInterface, Upd
      *
      * @return Response
      */
-    public function store()
+    public function store(Store{{Entity}}Request $request, {{Entity}}Creator ${{instance}}_creator )
     {
-        ${{instance}}_creator = App::make('App\Services\{{Entities}}\{{Entity}}Creator');
-
-        return ${{instance}}_creator->create($this->{{instance}}, $this, Input::except('_token'));
+        return ${{instance}}_creator->create($this->{{instance}}, $this, $request->except('_token'));
     }
 
     /**
@@ -118,11 +119,9 @@ class {{Entities}}Controller extends Controller implements CreatorInterface, Upd
      * @param  int      $id
      * @return Response
      */
-    public function update($id)
+    public function update(Update{{Entity}}Request $request, {{Entity}}Updater ${{instance}}_updater, $id)
     {
-        ${{instance}}_updater = App::make('App\Services\{{Entities}}\{{Entity}}Updater');
-
-        return ${{instance}}_updater->update($this->{{instance}}, $this, $id, Input::except('_method'));
+        return ${{instance}}_updater->update($this->{{instance}}, $this, $id, $request->except('_method'));
     }
 
     /**

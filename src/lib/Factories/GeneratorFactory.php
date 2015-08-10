@@ -27,7 +27,7 @@ class GeneratorFactory
         try {
             $refl = $reflectionClass ?: new \ReflectionClass($fqcn);
         } catch (\ReflectionException $e) {
-            throw new \InvalidArgumentException("Unsupported input [{$what}] to load [{$fqcn}]");
+            throw new \InvalidArgumentException("Unsupported input [{$what}] to load [{$fqcn}] \n" . $e->getMessage());
         }
 
         //make sure the generator implements the interface properly
