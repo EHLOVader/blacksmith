@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Filesystem\Filesystem;
 use Mustache_Engine;
 use Mockery as m;
+use org\bovigo\vfs\vfsStream;
 
 class AggregateGeneratorDelegateTest extends \BlacksmithTest
 {
@@ -312,21 +313,28 @@ class AggregateGeneratorDelegateTest extends \BlacksmithTest
 
     public function testUpdateRoutesFile()
     {
+        $entity = 'order';
         $name = 'orders';
-        $dir = '/some/path';
-        $routes = implode(DIRECTORY_SEPARATOR, [$dir, 'app', 'routes.php']);
-        $data = "\n\nRoute::resource('" . $name . "', '" . ucwords($name) . "Controller');";
+        $dir = 'root';
+        $routes = implode(DIRECTORY_SEPARATOR, [$dir, 'app', 'Http', 'routes.php']);
+        $data = '/**** Route and IOC Binding for ' . ucwords($entity) . " ****/" . "\n";
+        $data .= "Route::resource('" . $name . "', '" . ucwords($name) . "Controller');" . "\n";
+        // App binding if not setup properly
+        $data .= "App::bind('App\\Contracts\\Repositories\\" . ucwords($entity) . "RepositoryInterface', 'App\\Repositories\\Db" . ucwords($entity) . "Repository');";
+
+        $root = vfsStream::setup('root', NULL, ['app' => ['Http' => ['routes.php' => '<?php ']]]);
+
 
         $this->filesystem->shouldReceive('get')->once()
-            ->with($routes)
+            ->with(vfsStream::URL($routes))
             ->andReturn('');
 
         $this->filesystem->shouldReceive('exists')->once()
-            ->with($routes)
+            ->with(vfsStream::URL($routes))
             ->andReturn(true);
 
         $this->filesystem->shouldReceive('append')->once()
-            ->with($routes, $data);
+            ->with(vfsStream::URL($routes), \Mockery::any());
 
         $delegate = new AggregateGeneratorDelegate(
             $this->command,
@@ -336,28 +344,31 @@ class AggregateGeneratorDelegateTest extends \BlacksmithTest
             $this->args,
             $this->optionReader
         );
-        $delegate->updateRoutesFile($name, $dir);
+        $delegate->updateRoutesFile($name, vfsStream::URL($dir));
     }
 
 
     public function testNotUpdateRoutesFileWithDuplicates()
     {
         $name = 'orders';
-        $dir = '/some/path';
-        $routes = implode(DIRECTORY_SEPARATOR, [$dir, 'app', 'routes.php']);
+        $dir = 'root';
+        $routes = implode(DIRECTORY_SEPARATOR, [$dir, 'app', 'Http', 'routes.php']);
         $route = "Route::resource('" . $name . "', '" . ucwords($name) . "Controller');";
         $data = "\n\n".$route;
 
+        $root = vfsStream::setup('root', NULL, ['app' => ['Http' => ['routes.php' => "<?php \n\n " . $data]]]);
+
+
         $this->filesystem->shouldReceive('get')->once()
-            ->with($routes)
+            ->with(vfsStream::URL($routes))
             ->andReturn($route);
 
         $this->filesystem->shouldReceive('exists')->once()
-            ->with($routes)
+            ->with(vfsStream::URL($routes))
             ->andReturn(true);
 
         $this->filesystem->shouldReceive('append')->never()
-            ->with($routes, $data);
+            ->with(vfsStream::URL($routes), $data);
 
         $delegate = new AggregateGeneratorDelegate(
             $this->command,
@@ -367,7 +378,7 @@ class AggregateGeneratorDelegateTest extends \BlacksmithTest
             $this->args,
             $this->optionReader
         );
-        $delegate->updateRoutesFile($name, $dir);
+        $delegate->updateRoutesFile($name, vfsStream::URL($dir));
     }
 
     private function getValidOptions()
