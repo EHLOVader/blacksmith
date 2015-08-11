@@ -26,7 +26,7 @@ class Form extends Generator implements GeneratorInterface
 
                 $elementType = 'select';
                 $table = studly_case(str_replace('_id', '', $property));
-                $result['element'] = "{!! Form::{$elementType}('{$property}', {$table}::lists('name', 'id') !!}";
+                $result['element'] = "{!! Form::{$elementType}('{$property}', App\\Models\\{$table}::lists('name', 'id')) !!}";
             }else{
 
                 $display = Str::title(str_replace('_', ' ', $property));
