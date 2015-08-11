@@ -1,9 +1,10 @@
+{{=<% %>=}}
 <?php namespace App\Models;
 
 use App\Contracts\Instances\InstanceInterface;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class {{Entity}} extends Eloquent implements InstanceInterface
+class <%Entity%> extends Eloquent implements InstanceInterface
 {
     protected $guarded = [];
 
@@ -11,4 +12,12 @@ class {{Entity}} extends Eloquent implements InstanceInterface
     {
         return $this->id;
     }
+
+    <%# relations %>
+    //TODO: add hasOne/hasMany on App\Models\Something
+    public function <%method%>()
+    {
+        return $this->belongsTo('App\Models\<%class%>');
+    }
+    <%/ relations %>
 }
