@@ -94,4 +94,21 @@ class MigrationColumnFactoryTest extends \BlacksmithTest
 
         $this->assertEquals($output, MigrationColumnFactory::make($input));
     }
+
+    public function testGeneratesColumnWithForeignConstraints() {
+        $input = [
+          'user_id' => [
+            'type'       => 'integer',
+            'decorators' => ['nullable', 'foreign']
+          ]
+        ];
+
+        $output = [];
+        $output[] = "\$table->increments('id');";
+        $output[] = "\$table->integer('user_id')->nullable();";
+        $output[] = "\$table->foreign('user_id')->references('id')->on('users');";
+        $output[] = "\$table->timestamps();";
+
+        $this->assertEquals($output, MigrationColumnFactory::make($input));
+    }
 }

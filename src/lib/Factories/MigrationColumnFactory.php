@@ -9,6 +9,8 @@
 class MigrationColumnFactory
 {
 
+    protected $schema = [];
+
     /**
      * Factory method to return the migration column data
      * 
@@ -30,18 +32,28 @@ class MigrationColumnFactory
      */
     protected function addColumns($fields)
     {
-        $schema = [];
+        $this->schema = [];
 
         foreach ($fields as $property => $details) {
 
-            $schema[] = $this->addColumn($property, $details);
+            if($this->fieldNeedsForeignConstraint($details))
+            {
+                if (($key = array_search('foreign', $details['decorators'])) !== FALSE) {
+                    unset($details['decorators'][$key]);
+                }
+                $this->schema[] = $this->addColumn($property, $details);
+                $this->addForeignConstraint($property, $details);
+            }else{
+                $this->schema[] = $this->addColumn($property, $details);
+            }
+
         }
 
         //add increments and timestamps
-        array_unshift($schema, "\$table->increments('id');");
-        array_push($schema, "\$table->timestamps();");
+        array_unshift($this->schema, "\$table->increments('id');");
+        array_push($this->schema, "\$table->timestamps();");
 
-        return $schema;
+        return $this->schema;
     }
 
     /**
@@ -87,5 +99,40 @@ class MigrationColumnFactory
         }
 
         return $output;
+    }
+
+        /**
+     * Add a foreign constraint field to the schema.
+     *
+     * @param array $segments
+     */
+    private function addForeignConstraint($property, $segments)
+    {
+        $segments['type'] = 'foreign';
+        $segments['decorators'] = [ "references('id')",
+          sprintf("on('%s')", $this->getTableNameFromForeignKey($property))];
+
+        $this->schema[] = $this->addColumn($property, $segments);
+    }
+    /**
+     * Try to figure out the name of a table from a foreign key.
+     * Ex: user_id => users
+     *
+     * @param  string $key
+     * @return string
+     */
+    private function getTableNameFromForeignKey($key)
+    {
+        return str_plural(str_replace('_id', '', $key));
+    }
+
+    /**
+     * Determine if the user wants a foreign constraint for the field.
+     *
+     * @param  array $segments
+     * @return bool
+     */
+    private function fieldNeedsForeignConstraint($segments) {
+        return isset($segments['decorators']) && !!in_array('foreign', $segments['decorators']);
     }
 }
