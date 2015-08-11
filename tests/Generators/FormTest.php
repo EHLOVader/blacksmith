@@ -70,4 +70,38 @@ class FormTest extends \BlacksmithTest
 
         $this->assertEquals($expected, $generator->getTemplateVars());
     }
+
+    public function testGetRelationVars() {
+        $generator = m::mock('Generators\Form');
+        $generator->shouldDeferMissing();
+
+        $generator->shouldReceive('getEntityName')->once()
+          ->andReturn('Order');
+
+        $fieldData = [
+          'user_id' => ['type' => 'integer', 'decorators'=>['foreign']]
+        ];
+
+        $generator->shouldReceive('getFieldData')->once()
+          ->andReturn($fieldData);
+
+        $form_rows = [
+          [
+            'label'   => "{!! Form::label('user_id', 'User:') !!}",
+            'element' => "{!! Form::select('user_id', User::lists('name', 'id') !!}"
+          ]
+        ];
+
+        $expected = [
+          'Entity'     => 'Order',
+          'Entities'   => 'Orders',
+          'collection' => 'orders',
+          'instance'   => 'order',
+          'fields'     => $fieldData,
+          'form_rows'  => $form_rows
+        ];
+
+        $this->assertEquals($expected, $generator->getTemplateVars());
+    }
+
 }

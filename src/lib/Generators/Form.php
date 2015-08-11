@@ -19,12 +19,25 @@ class Form extends Generator implements GeneratorInterface
 
         foreach ($fieldData as $property => $meta) {
 
-            $display           = Str::title(str_replace('_', ' ', $property));
-            $result['label']   = "{!! Form::label('{$property}', '{$display}:') !!}";
-            
-            $elementType       = $this->getElementType($meta['type']);
-            $result['element'] = "{!! Form::{$elementType}('{$property}') !!}";
-            
+
+            if($this->fieldHasForeignConstraint($meta)){
+                $display = Str::title(str_replace('_', ' ', str_replace('_id', '', $property)));
+                $result['label'] = "{!! Form::label('{$property}', '{$display}:') !!}";
+
+                $elementType = 'select';
+                $table = studly_case(str_replace('_id', '', $property));
+                $result['element'] = "{!! Form::{$elementType}('{$property}', {$table}::lists('name', 'id') !!}";
+            }else{
+
+                $display = Str::title(str_replace('_', ' ', $property));
+                $result['label']   = "{!! Form::label('{$property}', '{$display}:') !!}";
+
+                $elementType       = $this->getElementType($meta['type']);
+                $result['element'] = "{!! Form::{$elementType}('{$property}') !!}";
+            }
+
+
+
             $form_rows[]       = $result;
         }
 
@@ -57,5 +70,15 @@ class Form extends Generator implements GeneratorInterface
         ];
 
         return array_key_exists($dataType, $lookup) ? $lookup[$dataType] : "text";
+    }
+
+    /**
+     * Determine if the user wants a foreign constraint for the field.
+     *
+     * @param  array $segments
+     * @return bool
+     */
+    private function fieldHasForeignConstraint($segments) {
+        return isset($segments['decorators']) && !!in_array('foreign', $segments['decorators']);
     }
 }
