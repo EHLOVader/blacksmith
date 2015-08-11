@@ -58,7 +58,7 @@ class MigrationColumnFactory
 
         if (isset($details['args'])) {
 
-            $output = "\$table->$type('$property', " . $details['args'] . ")";
+            $output = "\$table->$type('$property', " . implode(', ', $details['args']) . ")";
         }
 
         if (isset($details['decorators'])) {

@@ -56,7 +56,7 @@ class FieldParserTest extends \BlacksmithTest
 
         $this->assertEquals(
             [
-                'name' => ['type' => 'string', 'args' => [15], 'decorators' => ['nullable']],
+                'name' => ['type' => 'string', 'args' => ['15'], 'decorators' => ['nullable']],
             ],
             $this->parser->parse('name:string(15):nullable')
         );
@@ -64,7 +64,7 @@ class FieldParserTest extends \BlacksmithTest
 
         $this->assertEquals(
             [
-                'column' => ['type' => 'double', 'args' => [15,8], 'decorators' => ['nullable', 'default(10)']],
+                'column' => ['type' => 'double', 'args' => ['15','8'], 'decorators' => ['nullable', 'default(10)']],
                 'age'  => ['type' => 'integer']
             ],
             $this->parser->parse('column:double(15,8):nullable:default(10), age:integer')

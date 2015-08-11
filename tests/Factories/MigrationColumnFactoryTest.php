@@ -88,7 +88,7 @@ class MigrationColumnFactoryTest extends \BlacksmithTest
 
         $output   = [];
         $output[] = "\$table->increments('id');";
-        $output[] = "\$table->double('average', 15,8)->nullable()->default(10);";
+        $output[] = "\$table->double('average', 15, 8)->nullable()->default(10);";
         $output[] = "\$table->integer('age');";
         $output[] = "\$table->timestamps();";
 
