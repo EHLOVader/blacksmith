@@ -60,7 +60,7 @@ class MigrationColumnFactoryTest extends \BlacksmithTest
         $input = [
             'name' => [
                 'type' => 'string',
-                'args' => '15',
+                'args' => ['15'],
                 'decorators' => ['nullable']
             ]
         ];
@@ -79,7 +79,7 @@ class MigrationColumnFactoryTest extends \BlacksmithTest
         $input = [
             'average' => [
                 'type' => 'double',
-                'args' => '15,8',
+                'args' => ['15', '8'],
                 'decorators' => ['nullable', 'default(10)']],
             'age'  => [
                 'type' => 'integer'
