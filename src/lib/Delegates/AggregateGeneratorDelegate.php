@@ -205,7 +205,7 @@ class AggregateGeneratorDelegate implements GeneratorDelegateInterface
          $name = strtolower(Pluralizer::plural($name));
 
 
-        $routes = implode(DIRECTORY_SEPARATOR, [$dir, 'app','HTTP', 'routes.php']);
+        $routes = implode(DIRECTORY_SEPARATOR, [$dir, 'app','Http', 'routes.php']);
 
         if ($this->filesystem->exists($routes)) {
             $route = '/**** Route and IOC Binding for '.ucwords($entity)." ****/"."\n";
