@@ -12,16 +12,12 @@
 @endif
 
 {!! Form::model($<%instance%>, array('method' => 'PATCH', 'route' => array('<% collection %>.update', $<% instance %>->id))) !!}
-    <ul>
-        
-        @include('<% collection %>._form')
+    @include('<% collection %>._form')
 
-        <li>
-            {!! Form::submit('Update', array('class' => 'btn btn-info')) !!}
-            {!! link_to_route('<% collection %>.show', 'Cancel', $<% instance %>->id, array('class' => 'btn')) !!}
-        </li>
-
-    </ul>
+    <div class="form-group">
+        {!! Form::submit('Update', array('class' => 'btn btn-info')) !!}
+        {!! link_to_route('<% collection %>.show', 'Cancel', $<% instance %>->id, array('class' => 'btn btn-default')) !!}
+    </div>
 {!! Form::close() !!}
 
 @stop
