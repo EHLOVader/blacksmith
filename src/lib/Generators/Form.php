@@ -26,14 +26,14 @@ class Form extends Generator implements GeneratorInterface
 
                 $elementType = 'select';
                 $table = studly_case(str_replace('_id', '', $property));
-                $result['element'] = "{!! Form::{$elementType}('{$property}', App\\Models\\{$table}::lists('name', 'id')) !!}";
+                $result['element'] = "{!! Form::{$elementType}('{$property}', App\\Models\\{$table}::lists('name', 'id'), null, ['class'=>'form-control']) !!}";
             }else{
 
                 $display = Str::title(str_replace('_', ' ', $property));
                 $result['label']   = "{!! Form::label('{$property}', '{$display}:') !!}";
 
                 $elementType       = $this->getElementType($meta['type']);
-                $result['element'] = "{!! Form::{$elementType}('{$property}') !!}";
+                $result['element'] = "{!! Form::{$elementType}('{$property}', null, ['class'=>'form-control']) !!}";
             }
 
 
