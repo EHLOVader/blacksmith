@@ -55,7 +55,7 @@ class FormTest extends \BlacksmithTest
         $form_rows = [
             [
                 'label' => "{!! Form::label('name', 'Name:') !!}",
-                'element' => "{!! Form::text('name') !!}"
+                'element' => "{!! Form::text('name', null, ['class'=>'form-control']) !!}"
             ]
         ];
 
@@ -88,7 +88,7 @@ class FormTest extends \BlacksmithTest
         $form_rows = [
           [
             'label'   => "{!! Form::label('user_id', 'User:') !!}",
-            'element' => "{!! Form::select('user_id', App\\Models\\User::lists('name', 'id')) !!}"
+            'element' => "{!! Form::select('user_id', App\\Models\\User::lists('name', 'id'), null, ['class'=>'form-control']) !!}"
           ]
         ];
 
