@@ -152,7 +152,7 @@ class ConfigReaderTest extends \BlacksmithTest
         $configArr = json_decode($json, true);
 
         $missing = $configArr;
-        unset($missing[ConfigReader::CONFIG_KEY_MODEL]);
+        unset($missing['parts'][ConfigReader::CONFIG_KEY_MODEL]);
         $missingJson = json_encode($missing, JSON_UNESCAPED_SLASHES);
 
         $fs = m::mock('Illuminate\Filesystem\Filesystem');
@@ -174,7 +174,7 @@ class ConfigReaderTest extends \BlacksmithTest
         $configArr = json_decode($json, true);
 
         $missing = $configArr;
-        unset($missing[ConfigReader::CONFIG_KEY_MODEL][ConfigReader::CONFIG_VAL_TEMPLATE]);
+        unset($missing['parts'][ConfigReader::CONFIG_KEY_MODEL][ConfigReader::CONFIG_VAL_TEMPLATE]);
         $missingJson = json_encode($missing, JSON_UNESCAPED_SLASHES);
 
         $fs = m::mock('Illuminate\Filesystem\Filesystem');
@@ -196,7 +196,7 @@ class ConfigReaderTest extends \BlacksmithTest
         $configArr = json_decode($json, true);
 
         $missing = $configArr;
-        unset($missing[ConfigReader::CONFIG_KEY_MODEL][ConfigReader::CONFIG_VAL_DIRECTORY]);
+        unset($missing['parts'][ConfigReader::CONFIG_KEY_MODEL][ConfigReader::CONFIG_VAL_DIRECTORY]);
         $missingJson = json_encode($missing, JSON_UNESCAPED_SLASHES);
 
         $fs = m::mock('Illuminate\Filesystem\Filesystem');
@@ -218,7 +218,7 @@ class ConfigReaderTest extends \BlacksmithTest
         $configArr = json_decode($json, true);
 
         $missing = $configArr;
-        unset($missing[ConfigReader::CONFIG_KEY_MODEL][ConfigReader::CONFIG_VAL_FILENAME]);
+        unset($missing['parts'][ConfigReader::CONFIG_KEY_MODEL][ConfigReader::CONFIG_VAL_FILENAME]);
         $missingJson = json_encode($missing, JSON_UNESCAPED_SLASHES);
 
         $fs = m::mock('Illuminate\Filesystem\Filesystem');

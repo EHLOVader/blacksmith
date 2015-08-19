@@ -173,6 +173,7 @@ class ConfigReader implements ConfigReaderInterface
      * 
      * @return bool
      */
+    //TODO replace with something else
     public function validateConfig()
     {
         if (! array_key_exists(static::CONFIG_TYPE_KEY, $this->config)) {
@@ -182,23 +183,23 @@ class ConfigReader implements ConfigReaderInterface
         $keys_var = $this->config[static::CONFIG_TYPE_KEY].'_config_keys';
 
         foreach ($this->{$keys_var} as $key) {
-            if (! array_key_exists($key, $this->config)) {
+            if (! array_key_exists($key, $this->config['parts'])) {
                 return false;
             }
 
-            if ($this->config[$key] === false) {
+            if ($this->config['parts'][$key] === false) {
                 continue;
             }
 
-            if (! array_key_exists(static::CONFIG_VAL_TEMPLATE, $this->config[$key])) {
+            if (! array_key_exists(static::CONFIG_VAL_TEMPLATE, $this->config['parts'][$key])) {
                 return false;
             }
 
-            if (! array_key_exists(static::CONFIG_VAL_DIRECTORY, $this->config[$key])) {
+            if (! array_key_exists(static::CONFIG_VAL_DIRECTORY, $this->config['parts'][$key])) {
                 return false;
             }
 
-            if (! array_key_exists(static::CONFIG_VAL_FILENAME, $this->config[$key])) {
+            if (! array_key_exists(static::CONFIG_VAL_FILENAME, $this->config['parts'][$key])) {
                 return false;
             }
         }
@@ -214,6 +215,7 @@ class ConfigReader implements ConfigReaderInterface
      * @param string $config_type
      * @return array
      */
+    //TODO replace with a dynamic lookup from json
     public function getAvailableGenerators($config_type)
     {
         if (! in_array($config_type, $this->config_types)) {
@@ -244,6 +246,7 @@ class ConfigReader implements ConfigReaderInterface
      * @param  string $key
      * @return array       
      */
+    //TODO replace with a dynamic lookup from json
     public function getAggregateValues($key)
     {
         return array_key_exists($key, $this->aggregates) ? $this->aggregates[$key] : false;
@@ -276,7 +279,7 @@ class ConfigReader implements ConfigReaderInterface
             return false;
         }
 
-        return $this->config[$key];
+        return $this->config['parts'][$key];
     }
 
 
