@@ -161,12 +161,41 @@ class ConfigReader implements ConfigReaderInterface
             $this->configDir = pathinfo($path, PATHINFO_DIRNAME);
 
         } else {
-            $default = __DIR__.'/../Generators/templates/hexagonal/config.json';
-            $this->configDir = pathinfo($default, PATHINFO_DIRNAME);
-            $this->config = json_decode($this->filesystem->get($default), true);
+            $path = $this->getHomeDir() . '/config.json';
+            if(!$this->filesystem->exists($path)){
+                $path = getcwd() . '/.blacksmith/config.json';
+                if (!$this->filesystem->exists($path)) {
+                    $path = __DIR__ . '/../Generators/templates/hexagonal/config.json';
+                }
+            }
+            $this->configDir = pathinfo($path, PATHINFO_DIRNAME);
+            $this->config = json_decode($this->filesystem->get($path), true);
         }
     }
 
+    /**
+     * Based on Composer
+     * @return string
+     * @throws \RuntimeException
+     */
+    protected static function getHomeDir() {
+        $home = getenv('BLACKSMITH_HOME');
+        if (!$home) {
+            if (defined('PHP_WINDOWS_VERSION_MAJOR')) {
+                if (!getenv('APPDATA')) {
+                    throw new \RuntimeException('The APPDATA or BLACKSMITH_HOME environment variable must be set for composer to run correctly');
+                }
+                $home = strtr(getenv('APPDATA'), '\\', '/') . '/Blacksmith';
+            }
+            else {
+                if (!getenv('HOME')) {
+                    throw new \RuntimeException('The HOME or BLACKSMITH_HOME environment variable must be set for composer to run correctly');
+                }
+                $home = rtrim(getenv('HOME'), '/') . '/.blacksmith';
+            }
+        }
+        return $home;
+    }
 
     /**
      * Function to validate the currently loaded config

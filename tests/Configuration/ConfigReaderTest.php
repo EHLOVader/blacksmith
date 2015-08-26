@@ -14,7 +14,7 @@ class ConfigReaderTest extends \BlacksmithTest
     {
         $path = '/path/to/config.json';
         $fs = m::mock('Illuminate\Filesystem\Filesystem');
-        $fs->shouldReceive('exists')->once()->with($path)->andReturn(false);
+        $fs->shouldReceive('exists')->times()->with($path)->andReturn(false);
 
         $reader = new ConfigReader($fs, $path);
     }
@@ -25,7 +25,7 @@ class ConfigReaderTest extends \BlacksmithTest
     {
         $path = '/path/to/config.json';
         $fs = m::mock('Illuminate\Filesystem\Filesystem');
-        $fs->shouldReceive('exists')->once()->with($path)->andReturn(true);
+        $fs->shouldReceive('exists')->times()->with($path)->andReturn(true);
         $fs->shouldReceive('get')->once()->with($path);
 
         $reader = new ConfigReader($fs, $path);
@@ -37,6 +37,7 @@ class ConfigReaderTest extends \BlacksmithTest
     {
         $path = __DIR__.'/../../src/lib/Generators/templates/hexagonal/config.json';
         $fs = m::mock('Illuminate\Filesystem\Filesystem');
+        $fs->shouldReceive('exists')->times()->withAnyArgs()->andReturn(false);
         $fs->shouldReceive('get')->once()->withAnyArgs();
 
         $reader = new ConfigReader($fs);
@@ -59,6 +60,7 @@ class ConfigReaderTest extends \BlacksmithTest
         $configArr = json_decode($json, true);
 
         $fs = m::mock('Illuminate\Filesystem\Filesystem');
+        $fs->shouldReceive('exists')->times()->withAnyArgs()->andReturn(FALSE);
         $fs->shouldReceive('get')->once()->withAnyArgs()
             ->andReturn($json);
 
@@ -79,6 +81,7 @@ class ConfigReaderTest extends \BlacksmithTest
         $configArr = json_decode($json, true);
 
         $fs = m::mock('Illuminate\Filesystem\Filesystem');
+        $fs->shouldReceive('exists')->times()->withAnyArgs()->andReturn(FALSE);
         $fs->shouldReceive('get')->once()->withAnyArgs()
             ->andReturn($json);
 
@@ -96,6 +99,7 @@ class ConfigReaderTest extends \BlacksmithTest
         $json = file_get_contents($path);
 
         $fs = m::mock('Illuminate\Filesystem\Filesystem');
+        $fs->shouldReceive('exists')->times()->withAnyArgs()->andReturn(FALSE);
         $fs->shouldReceive('get')->once()->withAnyArgs()
             ->andReturn($json);
 
@@ -134,6 +138,7 @@ class ConfigReaderTest extends \BlacksmithTest
         $missingJson = json_encode($missing, JSON_UNESCAPED_SLASHES);
 
         $fs = m::mock('Illuminate\Filesystem\Filesystem');
+        $fs->shouldReceive('exists')->times()->withAnyArgs()->andReturn(FALSE);
         $fs->shouldReceive('get')->once()->withAnyArgs()
             ->andReturn($missingJson);
 
@@ -156,6 +161,7 @@ class ConfigReaderTest extends \BlacksmithTest
         $missingJson = json_encode($missing, JSON_UNESCAPED_SLASHES);
 
         $fs = m::mock('Illuminate\Filesystem\Filesystem');
+        $fs->shouldReceive('exists')->times()->withAnyArgs()->andReturn(FALSE);
         $fs->shouldReceive('get')->once()->withAnyArgs()
             ->andReturn($missingJson);
 
@@ -178,6 +184,7 @@ class ConfigReaderTest extends \BlacksmithTest
         $missingJson = json_encode($missing, JSON_UNESCAPED_SLASHES);
 
         $fs = m::mock('Illuminate\Filesystem\Filesystem');
+        $fs->shouldReceive('exists')->times()->withAnyArgs()->andReturn(FALSE);
         $fs->shouldReceive('get')->once()->withAnyArgs()
             ->andReturn($missingJson);
 
@@ -200,6 +207,7 @@ class ConfigReaderTest extends \BlacksmithTest
         $missingJson = json_encode($missing, JSON_UNESCAPED_SLASHES);
 
         $fs = m::mock('Illuminate\Filesystem\Filesystem');
+        $fs->shouldReceive('exists')->times()->withAnyArgs()->andReturn(FALSE);
         $fs->shouldReceive('get')->once()->withAnyArgs()
             ->andReturn($missingJson);
 
@@ -222,6 +230,7 @@ class ConfigReaderTest extends \BlacksmithTest
         $missingJson = json_encode($missing, JSON_UNESCAPED_SLASHES);
 
         $fs = m::mock('Illuminate\Filesystem\Filesystem');
+        $fs->shouldReceive('exists')->times()->withAnyArgs()->andReturn(FALSE);
         $fs->shouldReceive('get')->once()->withAnyArgs()
             ->andReturn($missingJson);
 
@@ -237,6 +246,7 @@ class ConfigReaderTest extends \BlacksmithTest
         $json = file_get_contents($path);
 
         $fs = m::mock('Illuminate\Filesystem\Filesystem');
+        $fs->shouldReceive('exists')->times()->withAnyArgs()->andReturn(FALSE);
         $fs->shouldReceive('get')->once()->withAnyArgs()
             ->andReturn($json);
 
@@ -254,6 +264,7 @@ class ConfigReaderTest extends \BlacksmithTest
         $json = file_get_contents($path);
 
         $fs = m::mock('Illuminate\Filesystem\Filesystem');
+        $fs->shouldReceive('exists')->times()->withAnyArgs()->andReturn(FALSE);
         $fs->shouldReceive('get')->once()->withAnyArgs()
             ->andReturn($json);
 
@@ -270,6 +281,7 @@ class ConfigReaderTest extends \BlacksmithTest
         $json = file_get_contents($path);
 
         $fs = m::mock('Illuminate\Filesystem\Filesystem');
+        $fs->shouldReceive('exists')->times()->withAnyArgs()->andReturn(FALSE);
         $fs->shouldReceive('get')->once()->withAnyArgs()
             ->andReturn($json);
 
@@ -287,6 +299,7 @@ class ConfigReaderTest extends \BlacksmithTest
         $json = file_get_contents($path);
 
         $fs = m::mock('Illuminate\Filesystem\Filesystem');
+        $fs->shouldReceive('exists')->times()->withAnyArgs()->andReturn(FALSE);
         $fs->shouldReceive('get')->once()->withAnyArgs()
             ->andReturn($json);
 
@@ -305,6 +318,7 @@ class ConfigReaderTest extends \BlacksmithTest
         $json = file_get_contents($path);
 
         $fs = m::mock('Illuminate\Filesystem\Filesystem');
+        $fs->shouldReceive('exists')->times()->withAnyArgs()->andReturn(FALSE);
         $fs->shouldReceive('get')->once()->withAnyArgs()
             ->andReturn($json);
 
