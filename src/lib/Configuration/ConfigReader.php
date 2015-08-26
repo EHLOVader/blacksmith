@@ -161,9 +161,9 @@ class ConfigReader implements ConfigReaderInterface
             $this->configDir = pathinfo($path, PATHINFO_DIRNAME);
 
         } else {
-            $path = $this->getHomeDir() . '/config.json';
+            $path = getcwd() . '/.blacksmith/config.json';
             if(!$this->filesystem->exists($path)){
-                $path = getcwd() . '/.blacksmith/config.json';
+                $path = $this->getHomeDir() . '/config.json';
                 if (!$this->filesystem->exists($path)) {
                     $path = __DIR__ . '/../Generators/templates/hexagonal/config.json';
                 }

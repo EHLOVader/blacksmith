@@ -21,6 +21,7 @@ class ConfigReaderFactoryTest extends \BlacksmithTest
     public function testMakesValidConfigReaderWithHomePath() {
         $path = rtrim(getenv('HOME'), '/') . '/.blacksmith/config.json';
         $fs = m::mock('Illuminate\Filesystem\Filesystem');
+        $fs->shouldReceive('exists')->once()->withAnyArgs()->andReturn(FALSE);
         $fs->shouldReceive('exists')->once()->with($path)->andReturn(TRUE);
         $fs->shouldReceive('get')->once()->withAnyArgs();
 
@@ -37,7 +38,6 @@ class ConfigReaderFactoryTest extends \BlacksmithTest
     public function testMakesValidConfigReaderWithProjectPath() {
         $path = getcwd() . '/.blacksmith/config.json';
         $fs = m::mock('Illuminate\Filesystem\Filesystem');
-        $fs->shouldReceive('exists')->once()->withAnyArgs()->andReturn(FALSE);
         $fs->shouldReceive('exists')->once()->with($path)->andReturn(TRUE);
         $fs->shouldReceive('get')->once()->withAnyArgs();
 
